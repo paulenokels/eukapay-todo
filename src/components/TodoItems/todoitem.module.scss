@@ -1,0 +1,16 @@
+@use '../../styles/constants';
+
+.itemWrapper {
+
+    border-radius: 4px;
+    border-color: constants.$app-color;
+    border-style: solid;
+    border-width: 1px;
+    padding: 10px;
+    min-width: 4rem;
+    margin-bottom: 8px;
+}
+.dueDate {
+    color: gray;
+    font-size: small;
+}

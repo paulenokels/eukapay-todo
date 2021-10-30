@@ -5,12 +5,13 @@ import DateAdapter from '@mui/lab/AdapterMoment';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from '@mui/lab/DatePicker';
 
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import styles from './todo.module.scss'
 import notify from '../../utils/notify';
 import { notifTypes, todoStatus } from '../../utils/constants';
 import todoService from '../../services/todoService';
 import todoItem from '../../interfaces/todoItem.type';
+import { TodoContext } from '../../contexts/todo/todo-context';
 
 
 
@@ -19,6 +20,8 @@ const AddTodoForm = () => {
     const [content, setContent] = useState('');
     const [dueDate, setDueDate] = useState('');
     const [btnDisabled, setBtnDisabled] = useState(false);
+    
+    const { addTodo } = useContext(TodoContext);
 
     const handleChange = (e) => setContent(e.target.value);
 
@@ -34,24 +37,25 @@ const AddTodoForm = () => {
         const body : todoItem = {
             content,
             dueDate: dueDate.format("YYYY-DD-MM"),
-            status: todoStatus.DONE
+            status: todoStatus.UNFINISHED
         }
 
         const req = await todoService.addTodo(body);
         const res = req.data;
 
-        console.log(res);
         if (!res) {
             notify({type: notifTypes.ERROR, msg: 'Something went wrong, check your internet and try again'});
         }
 
         else if (res.success) {
+            const item : todoItem = res.item
             notify({type: notifTypes.SUCCESS, msg: 'Item added successfully'});
             setContent('');
+            addTodo(item);
 
         }
 
-        //activate "add todo" button
+        //Re-activate "add todo" button
         setBtnDisabled(false);
         
 

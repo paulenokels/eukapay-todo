@@ -4,6 +4,16 @@ import todoItem from '../interfaces/todoItem.type';
 
  const todoService = {
 
+    getTodoItems: async () => {
+        try {
+            return await axios.get('http://localhost:3000/api/todos');
+         }
+     
+         catch(err) {
+             return(err)
+         }
+    },
+
     addTodo :  async (item: todoItem) => {
     
         try {
