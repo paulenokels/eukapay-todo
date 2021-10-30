@@ -1,0 +1,11 @@
+@use '../../public/styles/constants';
+
+.headerWrapper {
+    background-color: constants.$app-color;
+    padding: .5em;
+}
+
+.headerTitle {
+    color: #fff;
+    font-size: 1.5em;
+}

@@ -1,0 +1,11 @@
+@use '../../public/styles/constants';
+
+.footerWrapper {
+   
+    background-color: constants.$app-color;
+    padding: .5em;
+    color: #fff;
+    width: 100%;
+    margin-top: auto;
+
+}
