@@ -23,6 +23,16 @@ import todoItem from '../interfaces/todoItem.type';
         catch(err) {
             return(err)
         }
+    },
+
+    deleteTodo : async (id: string) => {
+        try {
+            return await axios.delete('/api/deleteTodo?id='+id);
+         }
+     
+         catch(err) {
+             return(err)
+         }
     }
 }
 

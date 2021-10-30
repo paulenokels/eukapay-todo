@@ -56,7 +56,7 @@ const todoModel = {
 
     },
 
-    deleteTodoItem : (id: string) : boolean => {
+    deleteTodo : (id: string) : boolean => {
         const todos : todoItem[] = db.todos;
         for (let i = 0; i<todos.length; i++) {
             if (todos[i].id == id) {

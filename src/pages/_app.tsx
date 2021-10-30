@@ -7,7 +7,7 @@ import { ToastContainer } from 'react-toastify';
 function App({ Component, pageProps }: AppProps) {
   return <>
           <Component {...pageProps} />
-          <ToastContainer />
+          <ToastContainer limit={1}/>
         </>
 }
 
