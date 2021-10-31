@@ -14,6 +14,17 @@ import todoItem from '../interfaces/todoItem.type';
          }
     },
 
+    getTodoItem : async(id: string) => {
+        console.log(id);
+        try {
+            return await axios.get('http://localhost:3000/api/getTodo?id='+id);
+         }
+     
+         catch(err) {
+             return(err)
+         }
+    },
+
     addTodo :  async (item: todoItem) => {
     
         try {
@@ -28,6 +39,17 @@ import todoItem from '../interfaces/todoItem.type';
     deleteTodo : async (id: string) => {
         try {
             return await axios.delete('/api/deleteTodo?id='+id);
+         }
+     
+         catch(err) {
+             return(err)
+         }
+    },
+
+    updateTodo : async (todoItem: todoItem) => {
+        
+        try {
+            return await axios.patch('/api/updateTodo', todoItem);
          }
      
          catch(err) {

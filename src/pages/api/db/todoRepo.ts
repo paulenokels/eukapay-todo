@@ -18,13 +18,13 @@ const writeDb = (obj) => {
     }
 }
 
-const todoModel = {
-    addTodo : (content : string, dueDate: Date) : (todoItem | boolean) => {
+const todoRepo = {
+    save : (content : string, dueDate: Date, status: string) : (todoItem | boolean) => {
         const item : todoItem = {
             id: uniqid(),
             content,
             dueDate,
-            status: todoStatus.UNFINISHED,
+            status
         }
         let todos : todoItem[] = db.todos;
         
@@ -37,18 +37,29 @@ const todoModel = {
 
     },
 
-    getTodoItems : () : (todoItem[] | []) => {
+    findAll : () : (todoItem[] | []) => {
         return db.todos
     },
 
-    updateTodoItem : (updatedItem: todoItem) : (todoItem | false) => {
+    findOne : (id: string) : (todoItem | boolean ) => {
+       for (let item of db.todos) {
+           if (item.id == id) {
+               return item;
+           }
+       }
+       return false
+    },
+
+    update : (todoItem: todoItem) : (todoItem | false) => {
 
         const todos: todoItem[] = db.todos;
 
         for (let item of todos) {
-            if (item.id == updatedItem.id) {
-                item = updatedItem;
-                if(writeDb(db)) return updatedItem
+            if (item.id == todoItem.id) {
+                item.content = todoItem.content;
+                item.dueDate = todoItem.dueDate;
+                item.status = todoItem.status
+                if(writeDb(db)) return item;
             }
         }
 
@@ -56,7 +67,7 @@ const todoModel = {
 
     },
 
-    deleteTodo : (id: string) : boolean => {
+    delete : (id: string) : boolean => {
         const todos : todoItem[] = db.todos;
         for (let i = 0; i<todos.length; i++) {
             if (todos[i].id == id) {
@@ -68,7 +79,7 @@ const todoModel = {
         return false;
     },
 
-    clearItems : () : boolean =>  {
+    deleteAll : () : boolean =>  {
         db.todos = [];
         if(writeDb(db)) return true;
         return false;
@@ -77,6 +88,6 @@ const todoModel = {
 
 }
 
-export default todoModel;
+export default todoRepo;
 
-module.exports = todoModel;
+module.exports = todoRepo;

@@ -3,5 +3,7 @@ import todoItem from "../../interfaces/todoItem.type";
 
 export const TodoContext = createContext({
     todoItems: [],
-    addTodo : (item: todoItem) => {}
+    addTodo : (item: todoItem) => {},
+    deleteTodo: (id: string) => {},
+    updateTodo: (item: todoItem) => {},
 });

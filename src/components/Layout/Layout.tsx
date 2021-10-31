@@ -2,6 +2,8 @@ import Header from "../Header/Header"
 import Footer from "../Footer/Footer"
 import styles from './layout.module.scss'
 
+
+
 export default function Layout({ children }) {
     return <div >
         

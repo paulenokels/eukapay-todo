@@ -25,11 +25,35 @@ export async function getServerSideProps(context) {
 
 export default function Home({todos}) {
   const [todoItems, setTodoItems] = useState(todos);
+
   const addTodo = (todo : todoItem) => {
     setTodoItems([...todoItems, todo]);
   }
+
+  const deleteTodo = (id:string) => {
+    for (let i = 0; i<todoItems.length; i++) {
+       if (todoItems[i].id == id) {
+          todoItems.splice(i, 1);
+          setTodoItems([...todoItems]);
+          break;
+       }
+    }
+  }
+  
+  //update operation on the context, basically a find and replace
+  const updateTodo = (todoItem: todoItem) => {
+    for (let i = 0; i<todoItems.length; i++) {
+      if (todoItems[i].id == todoItem.id) {
+         todoItems[i] = todoItem;
+         setTodoItems([...todoItems]);
+         break;
+      }
+   }
+  }
+
+
   return (
-    <TodoContext.Provider value={{todoItems, addTodo}}>
+    <TodoContext.Provider value={{todoItems, addTodo, deleteTodo, updateTodo}}>
         <Layout>
           <Grid container
             direction="row"
@@ -39,7 +63,7 @@ export default function Home({todos}) {
 
             <Grid item>
               <h4>Add Todo Item</h4>
-              <TodoForm />
+              <TodoForm mode="add"/>
             </Grid>
 
             <Grid item  style={{borderRight: '5px solid blue'}}>
