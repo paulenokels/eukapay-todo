@@ -1,5 +1,11 @@
 @use '../../styles/constants';
 
+.wrapper {
+    border-left: 3px solid constants.$app-color;
+    padding-left: 10px;
+    margin-left: 10px;
+}
+
 .itemWrapper {
 
     border-radius: 4px;

@@ -6,6 +6,6 @@ export const notifTypes = {
 }
 
 export const todoStatus = {
-    UNFINISHED: 'unfinished',
-    DONE: 'done'
+    UNFINISHED: 'UNFINISHED',
+    DONE: 'DONE'
 }

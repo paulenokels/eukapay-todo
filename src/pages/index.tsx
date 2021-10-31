@@ -7,12 +7,13 @@ import { TodoContext } from '../contexts/todo/todo-context'
 import todoService from '../services/todoService'
 import todoItem from '../interfaces/todoItem.type'
 import { useState } from 'react'
+import { GetServerSideProps } from 'next'
 
-export async function getServerSideProps(context) {
+export const getServerSideProps : GetServerSideProps = async (context : any) => {
   const req =  await todoService.getTodoItems();
   const res = req.data;
   if (res.success) {
-    const todos = res.todoItems;
+    const todos : todoItem[] | [] = res.todoItems;
     return {
       props: { todos }
    }
@@ -21,15 +22,21 @@ export async function getServerSideProps(context) {
     props: {}
   }
   }
+
+
   
 
-export default function Home({todos}) {
+  const Home : React.FC<{todos: todoItem[] | []}> = ({todos}) => {
   const [todoItems, setTodoItems] = useState(todos);
 
+  //this is called when an item is successfully added to the backed
+  //so the context state is updated
   const addTodo = (todo : todoItem) => {
     setTodoItems([...todoItems, todo]);
   }
 
+  //this is called on successful delete on the backend
+  //the item is removed from the context state
   const deleteTodo = (id:string) => {
     for (let i = 0; i<todoItems.length; i++) {
        if (todoItems[i].id == id) {
@@ -40,7 +47,7 @@ export default function Home({todos}) {
     }
   }
   
-  //update operation on the context, basically a find and replace
+  //update operation on the context state, basically a find and replace
   const updateTodo = (todoItem: todoItem) => {
     for (let i = 0; i<todoItems.length; i++) {
       if (todoItems[i].id == todoItem.id) {
@@ -58,18 +65,17 @@ export default function Home({todos}) {
           <Grid container
             direction="row"
             justifyContent="center"
-            spacing={10}
+            spacing={2}
           >
 
-            <Grid item>
+            <Grid item md={3} sm={5} xs={12}>
               <h4>Add Todo Item</h4>
               <TodoForm mode="add"/>
             </Grid>
 
-            <Grid item  style={{borderRight: '5px solid blue'}}>
-              </Grid>
+         
 
-            <Grid item md={6}>
+            <Grid item md={6} sm={7} xs={12}>
               <h4>Todo Items</h4>
               <TodoItems />
             </Grid>
@@ -80,3 +86,5 @@ export default function Home({todos}) {
     </TodoContext.Provider>
   )
 }
+
+export default Home;

@@ -1,11 +1,11 @@
 
-const todoRepo = require('./db/todoRepo')
+const todoRepo = require('../__db__/todoRepo')
 
 
 export default function handler(req, res) {
         const id : string = req.query.id;
         const deleted : boolean =  todoRepo.delete(id);
-        res.status(200).json({success: deleted});
+        return res.status(200).json({success: deleted});
   }
 
   

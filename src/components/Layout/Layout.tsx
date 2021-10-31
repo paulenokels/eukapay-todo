@@ -6,14 +6,14 @@ import styles from './layout.module.scss'
 
 export default function Layout({ children }) {
     return <div >
-        
-            <Header />
 
-            <main className={styles.mainWrapper}>
-                {children}
-            </main>
+        <Header />
 
-                <Footer />
+        <main className={styles.mainWrapper}>
+            {children}
+        </main>
 
-            </div>
-  }
+        <Footer />
+
+    </div>
+}

@@ -22,9 +22,8 @@ type Props = {
     todo? : todoItem,
 }
 
-const TodoForm = (props) => {
-    const mode : string = props.mode;
-    let todo : todoItem = props.todo;
+const TodoForm : React.FC<{mode: string, todo?: todoItem}> = ({mode, todo}) => {
+    
 
     let [content, setContent] = useState('');
     let [dueDate, setDueDate] = useState(null);

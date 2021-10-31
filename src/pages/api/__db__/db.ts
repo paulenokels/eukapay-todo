@@ -3,7 +3,7 @@ const path = require('path')
 
   export default function db() {
 
-    const dbPath = path.resolve('./src/pages/api/db', 'dbFile.json');
+    const dbPath = path.resolve('./src/pages/api/__db__', 'dbFile.json');
     try {
         const db = fs.readFileSync(dbPath, 'utf8')
         return JSON.parse(db);

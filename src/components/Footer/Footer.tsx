@@ -1,7 +1,7 @@
 import styles from './footer.module.scss'
 import Grid from '@mui/material/Grid';
 
-const Footer = () => 
+const Footer : React.FC = () => 
 <Grid container
      direction="column" 
      alignItems="center" 

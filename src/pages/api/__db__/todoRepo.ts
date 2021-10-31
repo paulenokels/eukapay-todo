@@ -4,8 +4,7 @@ import { todoStatus } from "../../../utils/constants";
 const fs = require('fs');
 const path = require('path');
 const db = require('./db');
-const uniqid = require('uniqid')
-const dbPath = path.resolve('./src/pages/api/db', 'dbFile.json');
+const dbPath = path.resolve('./src/pages/api/__db__', 'dbFile.json');
 
 const writeDb = (obj) => {
     try {
@@ -19,21 +18,11 @@ const writeDb = (obj) => {
 }
 
 const todoRepo = {
-    save : (content : string, dueDate: Date, status: string) : (todoItem | boolean) => {
-        const item : todoItem = {
-            id: uniqid(),
-            content,
-            dueDate,
-            status
-        }
+    save : (item : todoItem) : (todoItem | boolean) => {
         let todos : todoItem[] = db.todos;
-        
         todos.push(item);
-
         if (writeDb(db)) return item;
         return false;
-     
-
 
     },
 

@@ -1,4 +1,4 @@
-import { useContext, useState } from "react"
+import { useContext } from "react"
 import { useRouter } from 'next/router'
 import Grid from '@mui/material/Grid'
 import Stack from '@mui/material/Stack'
@@ -15,7 +15,7 @@ import { FormControlLabel } from "@mui/material";
 import todoService from "../../services/todoService";
 import notify from "../../utils/notify";
 
-const TodoItems = () => {
+const TodoItems : React.FC = () => {
     const { todoItems, deleteTodo, updateTodo } = useContext(TodoContext);
     const router = useRouter();
 
@@ -41,11 +41,12 @@ const TodoItems = () => {
         //update the context state
         updateTodo(item);
 
+        //update the database on the server
         const req = await todoService.updateTodo(item);
         const res = req.data;
         if (!res || !res.success) {
             notify({ type: notifTypes.ERROR, msg: 'Error updating item, check connection' });
-            //update failed, revert changes
+            //update failed, revert changes done to the context
             item.status == todoStatus.DONE ? todoStatus.UNFINISHED : todoStatus.DONE;
             updateTodo(item);
         }
@@ -54,23 +55,24 @@ const TodoItems = () => {
 
 
     if (todoItems.length == 0) {
-        return <div>
+        return <div className={styles.wrapper}>
             <h4>You have not added any todo Items</h4>
         </div>
     }
 
-    return <Grid container direction="column">
+    return <Grid container direction="column" className={styles.wrapper}>
         {todoItems.map((item: todoItem) =>
             <Grid item key={item.id} className={styles.itemWrapper}>
                 <Grid item >
                     <Grid container justifyContent="space-between">
                         <Grid item>
                             <FormControlLabel
+                                aria-label="change-status"
                                 control={
                                     <Checkbox
                                         checked={item.status == todoStatus.DONE}
                                         onChange={(event) => todoStatusChanged(item, event.target.checked)}
-                                        name="gilad" />
+                                       />
                                 }
                                 label={item.content}
                             />
@@ -86,10 +88,10 @@ const TodoItems = () => {
 
 
                 <Stack direction="row" spacing={2}>
-                    <Button variant="outlined" size="small" startIcon={<EditIcon />} onClick={() => router.push(`/edit/${item.id}`)}>
+                    <Button aria-label="edit" variant="outlined" size="small" startIcon={<EditIcon />} onClick={() => router.push(`/edit/${item.id}`)}>
                         Edit
                     </Button>
-                    <Button onClick={() => deleteItem(item.id)} variant="outlined" size="small" startIcon={<DeleteIcon />}>
+                    <Button aria-label="delete" onClick={() => deleteItem(item.id)} variant="outlined" size="small" startIcon={<DeleteIcon />}>
                         Delete
                     </Button>
 
