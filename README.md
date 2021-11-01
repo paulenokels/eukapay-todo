@@ -7,22 +7,24 @@
     ```
 2. run 
     ```bash 
-    docker run -p 3000:3000 eukpay-todo-image
+    docker run -p 3000:3000 paulenokels/eukapay-todos:latest
     ```
 3. Visit http://localhost:3000 to see the app.
 
 ### Using NPM
-1. Install yarn if you dont have
+1. Clone this repository
+
+2. Install yarn if you dont have
 ```bash
 npm install --global yarn
 ```
 
-2. Install required packages
+3. Install required packages
 ```bash
 yarn install
 ```
 
-3. Start the application
+4. Start the application
 ```bash
     yarn dev
 ```
