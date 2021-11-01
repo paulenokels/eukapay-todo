@@ -1,32 +1,6 @@
-# FROM node:14-buster-slim
-# WORKDIR /app
-# COPY package.json yarn.lock /app
-# RUN npm ci --only=production && yarn cache clean --force
-# COPY . /app
-# CMD node index.js
-# EXPOSE 8081
-
-
-
-# FROM node:14-buster-slim
-# RUN mkdir -p /home/paulenokels/eukapay-app && chown -R node:node /home/paulenokels/eukapay-app
-# WORKDIR /home/paulenokels/eukapay-app
-# COPY --chown=node:node . .
-# # RUN yarn cache clean --force
-
-# # USER node
-
-
-# RUN yarn install --frozen-lockfile
-# RUN yarn build
-
-# EXPOSE 3000
-# CMD [ "yarn", "start" ]
-
 
 
 # Double-container Dockerfile for separated build process.
-# If you're just copy-pasting this, don't forget a .dockerignore!
 
 # We're starting with the same base image, but we're declaring
 # that this block outputs an image called DEPS that we
