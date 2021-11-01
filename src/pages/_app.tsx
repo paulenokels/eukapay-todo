@@ -7,7 +7,9 @@ import { ToastContainer } from 'react-toastify';
 function App({ Component, pageProps }: AppProps) {
   return <>
           <Component {...pageProps} />
-          <ToastContainer />
+
+          {/* Required for react-toastify library */}
+          <ToastContainer autoClose={3000} pauseOnFocusLoss={false}/>
         </>
 }
 

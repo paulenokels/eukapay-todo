@@ -3,8 +3,8 @@ import { notifTypes } from './constants';
 
 const notify = (payload) => {
 
-    const position = toast.POSITION.TOP_RIGHT
-    toast.clearWaitingQueue();
+    const position = toast.POSITION.TOP_RIGHT;
+    toast.dismiss();//dismiss any previous toast
     switch (payload.type) {
         case notifTypes.ERROR : { 
             toast.error(payload.msg, {position});
