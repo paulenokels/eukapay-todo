@@ -9,6 +9,7 @@
     ```bash 
     docker run -p 3000:3000 eukpay-todo-image
     ```
+3. Visit http://localhost:3000 to see the app.
 
 ### Using NPM
 1. Install yarn if you dont have
@@ -25,6 +26,7 @@ yarn install
 ```bash
     yarn dev
 ```
+4. Visit http://localhost:3000 to see the app.
 
 ## Testing
 ```bash
