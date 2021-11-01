@@ -3,11 +3,11 @@
 ### Using Docker
 1. Pull the image 
     ``` bash
-     docker pull paulenokels/eukapay-todos:latest
+     docker pull paulenokels/eukapay-todo-app:latest
     ```
 2. run 
     ```bash 
-    docker run -p 3000:3000 paulenokels/eukapay-todos:latest
+    docker run -p 3000:3000 paulenokels/eukapay-todo-app:latest
     ```
 3. Visit http://localhost:3000 to see the app.
 
