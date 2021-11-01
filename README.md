@@ -1,5 +1,16 @@
 ## How to start the application
 
+### Using Docker
+1. Pull the image 
+    ``` bash
+     docker pull paulenokels/eukapay-todos:latest
+    ```
+2. run 
+    ```bash 
+    docker run -p 3000:3000 eukpay-todo-image
+    ```
+
+### Using NPM
 1. Install yarn if you dont have
 ```bash
 npm install --global yarn

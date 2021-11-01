@@ -44,14 +44,6 @@ describe('Home', () => {
   })
 
  
-  it('Should Delete todo item',  () => {
-    render(<Home todos={todoItems}/>);
-
-    todoItems.splice(0,1);
-    console.log(todoItems);
-    render(<Home todos={todoItems}/>);
-
-    expect(screen.getByText(/Tomo/i)).not.toBeInTheDocument();
-  })
+  
  
 })

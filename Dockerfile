@@ -70,8 +70,8 @@ FROM node:14-buster-slim
 
 ENV NODE_ENV production
 
-RUN addgroup -g 1001 -S nodejs
-RUN adduser -S nextjs -u 1001
+RUN addgroup -g 1001 -r nodejs
+RUN adduser -S nextjs -u 1002
 
 # Pull the built files out of BUILD_IMAGE - we need:
 # 1. the package.json and yarn.lock
